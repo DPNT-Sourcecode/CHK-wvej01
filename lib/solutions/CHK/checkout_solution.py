@@ -60,7 +60,8 @@ def checkout(skus: str):
         if price_data_card.get(item_name) is None:
             return -1
     if len(skus) == 0:
-        return -1
+        return 0
     
     return get_total_price(skus, offers_data_card, price_data_card)
+
 
