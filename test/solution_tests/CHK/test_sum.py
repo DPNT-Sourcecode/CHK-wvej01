@@ -78,9 +78,10 @@ class TestGetTotalPrice:
         assert checkout_solution.get_total_price("AAAAABBCCC", offers_data_card, price_data_card) == 305
 
         assert checkout_solution.get_total_price("AAABBBBBBCCCDDD", offers_data_card, price_data_card) == 370
-
+        assert checkout_solution.get_total_price("EE", offers_data_card, price_data_card) == 80
         assert checkout_solution.get_total_price("EEB", offers_data_card, price_data_card) == 80
         assert checkout_solution.get_total_price("EEEEBB", offers_data_card, price_data_card) == 160
 
         assert checkout_solution.get_total_price("EEEB", offers_data_card, price_data_card) == 120
+
 
