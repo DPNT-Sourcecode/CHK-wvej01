@@ -8,12 +8,14 @@ price_data_card = {
     "B": 30,
     "C": 20,
     "D": 15,
-    "E": 40
+    "E": 40,
+    "F": 10
 }
 
 offers_data_card = {
     "A": {5: 200, 3: 130},
     "E": {2: {"B": 1}},
+    "F": {3: {"F": 1}},
     "B": {2: 45},
     
 }
@@ -71,3 +73,4 @@ def checkout(skus: str):
         return 0
         
     return get_total_price(skus, offers_data_card, price_data_card)
+

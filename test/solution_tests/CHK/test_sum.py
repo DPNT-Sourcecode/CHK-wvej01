@@ -6,12 +6,14 @@ price_data_card = {
     "B": 30,
     "C": 20,
     "D": 15,
-    "E": 40
+    "E": 40,
+    "F": 10
 }
 
 offers_data_card = {
     "A": {5: 200, 3: 130},
     "E": {2: {"B": 1}},
+    "F": {3: {"F": 1}},
     "B": {2: 45},
     
 }
@@ -74,16 +76,21 @@ class TestApplyRegularPrices:
 
 class TestGetTotalPrice:
     def test_get_total_price(self):
-        # assert checkout_solution.get_total_price("AABBCCC", offers_data_card, price_data_card) == 205
+        assert checkout_solution.get_total_price("AABBCCC", offers_data_card, price_data_card) == 205
 
-        # assert checkout_solution.get_total_price("AAAAABBCCC", offers_data_card, price_data_card) == 305
+        assert checkout_solution.get_total_price("AAAAABBCCC", offers_data_card, price_data_card) == 305
 
-        # assert checkout_solution.get_total_price("AAABBBBBBCCCDDD", offers_data_card, price_data_card) == 370
-        # assert checkout_solution.get_total_price("EE", offers_data_card, price_data_card) == 80
-        # assert checkout_solution.get_total_price("EEB", offers_data_card, price_data_card) == 80
-        # assert checkout_solution.get_total_price("EEEEBB", offers_data_card, price_data_card) == 160
+        assert checkout_solution.get_total_price("AAABBBBBBCCCDDD", offers_data_card, price_data_card) == 370
+        assert checkout_solution.get_total_price("EE", offers_data_card, price_data_card) == 80
+        assert checkout_solution.get_total_price("EEB", offers_data_card, price_data_card) == 80
+        assert checkout_solution.get_total_price("EEEEBB", offers_data_card, price_data_card) == 160
 
-        # assert checkout_solution.get_total_price("EEEB", offers_data_card, price_data_card) == 120
+        assert checkout_solution.get_total_price("EEEB", offers_data_card, price_data_card) == 120
         
         assert checkout_solution.get_total_price("BEBEEE", offers_data_card, price_data_card) == 160
         assert checkout_solution.get_total_price("ABCDEABCDE", offers_data_card, price_data_card) == 280
+
+        assert checkout_solution.get_total_price("FFF", offers_data_card, price_data_card) == 20
+
+        assert checkout_solution.get_total_price("FFFEEB", offers_data_card, price_data_card) == 280
+
