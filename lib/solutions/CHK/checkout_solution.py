@@ -134,5 +134,6 @@ def checkout(skus: str):
     if len(skus) == 0:
         return 0
         
-    return get_total_price(skus, offers_data_card, price_data_card)
+    return get_total_price(skus, offers_data_card, price_data_card, multiply_offer_card)
+
 
