@@ -14,21 +14,59 @@ import pytest
 #             sum_solution.compute(5, 101)
 
 
-class TestQuantityCheck():
+class TestQuantityCheck:
     def test_q_check(self):
-        assert checkout_solution.calc_items_quantity("AA") == {"A": {"total_quantity": 2}}
-        assert checkout_solution.calc_items_quantity("AAABBBCCC") == {"A": {"total_quantity": 3}, "B": {"total_quantity": 3}, "C": {"total_quantity": 3}}
-        assert checkout_solution.calc_items_quantity("AABCCCC") == {"A": {"total_quantity": 2}, "B": {"total_quantity": 1}, "C": {"total_quantity": 4}}
-   
-class TestOffersApply():
+        assert checkout_solution.calc_items_quantity("AA") == {
+            "A": {"total_quantity": 2}
+        }
+        assert checkout_solution.calc_items_quantity("AAABBBCCC") == {
+            "A": {"total_quantity": 3},
+            "B": {"total_quantity": 3},
+            "C": {"total_quantity": 3},
+        }
+        assert checkout_solution.calc_items_quantity("AABCCCC") == {
+            "A": {"total_quantity": 2},
+            "B": {"total_quantity": 1},
+            "C": {"total_quantity": 4},
+        }
+
+
+class TestOffersApply:
     def test_offers_apply(self):
-        assert checkout_solution.apply_offers_price({"A": {"total_quantity": 7}}) == {"A": {"total_quantity": 7, "quantity_to_calc": 1, "offers_price": 260}}
+        assert checkout_solution.apply_offers_price({"A": {"total_quantity": 7}}) == {
+            "A": {"total_quantity": 7, "quantity_to_calc": 1, "offers_price": 260}
+        }
 
-        assert checkout_solution.apply_offers_price({"B": {"total_quantity": 6}, "D": {"total_quantity": 5}}) == {"B": {"total_quantity": 6, "quantity_to_calc": 0, "offers_price": 135}, "D": {"total_quantity": 5, "quantity_to_calc": 5}}
+        assert checkout_solution.apply_offers_price(
+            {"B": {"total_quantity": 6}, "D": {"total_quantity": 5}}
+        ) == {
+            "B": {"total_quantity": 6, "quantity_to_calc": 0, "offers_price": 135},
+            "D": {"total_quantity": 5, "quantity_to_calc": 5},
+        }
 
-class TestApplyRegularPrices():
+
+class TestApplyRegularPrices:
     def test_apply_regular_prices(self):
-        assert checkout_solution.apply_offers_price({"A": {"total_quantity": 7, "quantity_to_calc": 5, "offers_price": 10}, "B": {"total_quantity": 6, "quantity_to_calc": 10, "offers_price": 50,}}) == {"A": {"total_quantity": 7, "quantity_to_calc": 0, "offers_price": 10, "total_price": 260}, "B": {"total_quantity": 6, "quantity_to_calc": 0, "offers_price": 50, "total_price": 350}}
+        assert checkout_solution.apply_regular_prices(
+            {
+                "A": {"total_quantity": 7, "quantity_to_calc": 5, "offers_price": 10},
+                "B": {"total_quantity": 6, "quantity_to_calc": 10, "offers_price": 50},
+            }
+        ) == {
+            "A": {
+                "total_quantity": 7,
+                "quantity_to_calc": 0,
+                "offers_price": 10,
+                "total_price": 260,
+            },
+            "B": {
+                "total_quantity": 6,
+                "quantity_to_calc": 0,
+                "offers_price": 50,
+                "total_price": 350,
+            },
+        }
+
 
 
 

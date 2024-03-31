@@ -37,8 +37,8 @@ def apply_offers_price(data_dict: dict) -> dict:
 
 
 def apply_regular_prices(data_dict: dict) -> dict:
-    for _, data in data_dict.items():
-        data["regular_price"] = price_data * data["quantity_to_calc"]
+    for item_name, data in data_dict.items():
+        data["regular_price"] = price_data.get(item_name) * data["quantity_to_calc"]
         data["quantity_to_calc"] = 0
     
     for _, data in data_dict.items():
@@ -49,6 +49,7 @@ def apply_regular_prices(data_dict: dict) -> dict:
 def checkout(skus):
     print(skus)
     raise NotImplementedError()
+
 
 
 
