@@ -31,11 +31,15 @@ def apply_offers_price(data_dict: dict, offers_data: dict) -> dict:
         if offers is None:
             continue
         for offer_quantity, offer_data in offers.items():
-            while int(data["quantity_to_calc"]) >= offer_quantity:
+            quantity_to_calc_for_offer = data["quantity_to_calc"]
+            while quantity_to_calc_for_offer >= offer_quantity:
                 if isinstance(offer_data, dict):
+                    quantity_to_calc_for_offer -= offer_quantity
                     for item_offer, item_quantity in offer_data.items():
+                        breakpoint()
                         data_dict[item_offer]["quantity_to_calc"] -= item_quantity
                 else:
+                    quantity_to_calc_for_offer -= offer_quantity
                     data["quantity_to_calc"]-= offer_quantity
                     data["offers_price"] = data.get("offers_price", 0) + offer_data
     return data_dict
@@ -68,3 +72,4 @@ def checkout(skus: str):
         return 0
     
     return get_total_price(skus, offers_data_card, price_data_card)
+
