@@ -11,8 +11,8 @@ price_data = {
 }
 
 offers_data = {
-    "A": [{3: 130},],
-    "B": [{2: 45},]
+    "A": {3: 130},
+    "B": {2: 45}
 }
 
 def calc_items_quantity(skus: str) -> dict:
@@ -27,9 +27,9 @@ def apply_offers_price(data_dict: dict):
     for item_name, data in data_dict.items():
         data["quantity_to_calc"] = data["total_quantity"]
         offers = offers_data.get(item_name)
-        for offer_number, offer_price in offers:
-            while data["quantity_to_calc"] < offer_number:
-                data["quantity_to_calc"]-= offer_number
+        for offer_quantity, offer_price in offers.items():
+            while data["quantity_to_calc"] < offer_quantity:
+                data["quantity_to_calc"]-= offer_quantity
                 data["offers_price"] = data.get("offers_price", 0) + offer_price
     return data_dict
 
@@ -37,5 +37,6 @@ def apply_offers_price(data_dict: dict):
 def checkout(skus):
     print(skus)
     raise NotImplementedError()
+
 
 

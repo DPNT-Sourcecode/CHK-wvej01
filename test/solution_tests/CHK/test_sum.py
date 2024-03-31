@@ -18,9 +18,10 @@ class TestQuantityCheck():
     def test_q_check(self):
         assert checkout_solution.calc_items_quantity("AA") == {"A": {"total_quantity": 2}}
         assert checkout_solution.calc_items_quantity("AAABBBCCC") == {"A": {"total_quantity": 3}, "B": {"total_quantity": 3}, "C": {"total_quantity": 3}}
-        assert checkout_solution.calc_items_quantity("AABCCCC") == {"A": {"total_quantity": 1}, "B": {"total_quantity": 1}, "C": {"total_quantity": 4}}
+        assert checkout_solution.calc_items_quantity("AABCCCC") == {"A": {"total_quantity": 2}, "B": {"total_quantity": 1}, "C": {"total_quantity": 4}}
    
 class TestOffersApply():
     def test_offers_apply(self):
         assert checkout_solution.apply_offers_price({"A": {"total_quantity": 7}}) == {"A": {"total_quantity": 7, "quantity_to_calc": 1, "offers_price": 260}}
+
 
