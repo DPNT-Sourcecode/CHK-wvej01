@@ -71,11 +71,3 @@ def checkout(skus: str):
         return 0
         
     return get_total_price(skus, offers_data_card, price_data_card)
-
-
-
-
-
-
-
-
