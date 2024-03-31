@@ -47,6 +47,12 @@ offers_data_card = {
     "V": {3: 130, 2: 90}
 }
 
+multiply_offer = {
+    {"items": ["S", "T", "X", "Y", "Z"], "total_quantity": 3, "total_price": 45}
+}
+
+
+def apply_multi_offers()
 
 
 def calc_items_quantity(skus: str) -> dict:
@@ -102,5 +108,6 @@ def checkout(skus: str):
         return 0
         
     return get_total_price(skus, offers_data_card, price_data_card)
+
 
 
