@@ -35,7 +35,7 @@ offers_data_card = {
     "F": {3: {"F": 1}},
     "N": {3: {"M": 1}},
     "R": {3: {"Q": 1}},
-    "U": {3: {"U": 1}},
+    "U": {4: {"U": 1}},
     "A": {5: 200, 3: 130},
     "B": {2: 45},
     "H": {10: 80, 5: 45},
@@ -132,7 +132,7 @@ class TestGetTotalPrice:
 
         assert checkout_solution.get_total_price("RRRRQQQQ", offers_data_card, price_data_card) == 280
 
-        assert checkout_solution.get_total_price("UUU", offers_data_card, price_data_card) == 80
+        assert checkout_solution.get_total_price("UUUU", offers_data_card, price_data_card) == 120
 
 
 
