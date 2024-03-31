@@ -122,7 +122,17 @@ class TestGetTotalPrice:
 
         assert checkout_solution.get_total_price("FFFEEB", offers_data_card, price_data_card) == 100
 
-        assert checkout_solution.get_total_price("FFFEEB", offers_data_card, price_data_card) == 100
+        assert checkout_solution.get_total_price("KKK", offers_data_card, price_data_card) == 230
+
+        assert checkout_solution.get_total_price("NNNM", offers_data_card, price_data_card) == 120
+
+        assert checkout_solution.get_total_price("RRRRQ", offers_data_card, price_data_card) == 200
+
+        assert checkout_solution.get_total_price("RRRRQQ", offers_data_card, price_data_card) == 230
+
+        assert checkout_solution.get_total_price("RRRRQQQQ", offers_data_card, price_data_card) == 280
+
+        assert checkout_solution.get_total_price("UUU", offers_data_card, price_data_card) == 80
 
 
 
