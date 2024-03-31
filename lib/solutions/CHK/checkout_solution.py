@@ -70,16 +70,13 @@ def apply_multi_offers(data_dict: dict, multiply_offer: dict) -> dict:
                 if item_name not in offer["items"] or item_data["quantity_to_calc"] == 0:
                     continue
                 
-                itme
-                offer_price =  * item_price
-
+                item_quantity_to_process = min(item_data["quantity_to_calc"], items_to_process)
+                offer_price =  item_quantity_to_process * item_price
                 item_data["offers_price"] = item_data.get("offers_price", 0) + offer_price
+                items_to_process -= item_quantity_to_process
 
-                items_to_process -= 1
+    return data_dict
 
-
-            for item_name in offer["items"]:
-                item_quantity = 
 
 
 def calc_items_quantity(skus: str) -> dict:
@@ -118,9 +115,10 @@ def apply_regular_prices(data_dict: dict, price_data: dict) -> dict:
         data["total_price"] = data.get("offers_price", 0) + data["regular_price"]
     return data_dict
 
-def get_total_price(skus: str, offers_data, price_data):
+def get_total_price(skus: str, offers_data, price_data, multiply_offer):
     quantity_data = calc_items_quantity(skus)
-    items_with_offers_processed = apply_offers_price(quantity_data, offers_data)
+    items_with_multi_offers_processed = apply_multi_offers(quantity_data, multiply_offer)
+    items_with_offers_processed = apply_offers_price(items_with_multi_offers_processed, offers_data)
     items_with_reg_prices_processed = apply_regular_prices(items_with_offers_processed, price_data)
     return sum([data["total_price"] for _, data in items_with_reg_prices_processed.items()])
 

@@ -46,6 +46,11 @@ offers_data_card = {
     
 }
 
+multiply_offer_card = [
+    {"items": ["S", "T", "X", "Y", "Z"], "total_quantity": 3, "total_price": 45}
+]
+
+
 class TestQuantityCheck:
     def test_q_check(self):
         assert checkout_solution.calc_items_quantity("AA") == {
@@ -104,32 +109,38 @@ class TestApplyRegularPrices:
 
 class TestGetTotalPrice:
     def test_get_total_price(self):
-        assert checkout_solution.get_total_price("AABBCCC", offers_data_card, price_data_card) == 205
+        assert checkout_solution.get_total_price("AABBCCC", offers_data_card, price_data_card, multiply_offer_card) == 205
 
-        assert checkout_solution.get_total_price("AAAAABBCCC", offers_data_card, price_data_card) == 305
+        assert checkout_solution.get_total_price("AAAAABBCCC", offers_data_card, price_data_card, multiply_offer_card) == 305
 
-        assert checkout_solution.get_total_price("AAABBBBBBCCCDDD", offers_data_card, price_data_card) == 370
-        assert checkout_solution.get_total_price("EE", offers_data_card, price_data_card) == 80
-        assert checkout_solution.get_total_price("EEB", offers_data_card, price_data_card) == 80
-        assert checkout_solution.get_total_price("EEEEBB", offers_data_card, price_data_card) == 160
+        assert checkout_solution.get_total_price("AAABBBBBBCCCDDD", offers_data_card, price_data_card, multiply_offer_card) == 370
+        assert checkout_solution.get_total_price("EE", offers_data_card, price_data_card, multiply_offer_card) == 80
+        assert checkout_solution.get_total_price("EEB", offers_data_card, price_data_card, multiply_offer_card) == 80
+        assert checkout_solution.get_total_price("EEEEBB", offers_data_card, price_data_card, multiply_offer_card) == 160
 
-        assert checkout_solution.get_total_price("EEEB", offers_data_card, price_data_card) == 120
+        assert checkout_solution.get_total_price("EEEB", offers_data_card, price_data_card, multiply_offer_card) == 120
         
-        assert checkout_solution.get_total_price("BEBEEE", offers_data_card, price_data_card) == 160
-        assert checkout_solution.get_total_price("ABCDEABCDE", offers_data_card, price_data_card) == 280
+        assert checkout_solution.get_total_price("BEBEEE", offers_data_card, price_data_card, multiply_offer_card) == 160
+        assert checkout_solution.get_total_price("ABCDEABCDE", offers_data_card, price_data_card, multiply_offer_card) == 280
 
-        assert checkout_solution.get_total_price("FFF", offers_data_card, price_data_card) == 20
+        assert checkout_solution.get_total_price("FFF", offers_data_card, price_data_card, multiply_offer_card) == 20
 
-        assert checkout_solution.get_total_price("FFFEEB", offers_data_card, price_data_card) == 100
+        assert checkout_solution.get_total_price("FFFEEB", offers_data_card, price_data_card, multiply_offer_card) == 100
 
-        assert checkout_solution.get_total_price("KKK", offers_data_card, price_data_card) == 230
+        assert checkout_solution.get_total_price("KKK", offers_data_card, price_data_card, multiply_offer_card) == 230
 
-        assert checkout_solution.get_total_price("NNNM", offers_data_card, price_data_card) == 120
+        assert checkout_solution.get_total_price("NNNM", offers_data_card, price_data_card, multiply_offer_card) == 120
 
-        assert checkout_solution.get_total_price("RRRRQ", offers_data_card, price_data_card) == 200
+        assert checkout_solution.get_total_price("RRRRQ", offers_data_card, price_data_card, multiply_offer_card) == 200
 
-        assert checkout_solution.get_total_price("RRRRQQ", offers_data_card, price_data_card) == 230
+        assert checkout_solution.get_total_price("RRRRQQ", offers_data_card, price_data_card, multiply_offer_card) == 230
 
-        assert checkout_solution.get_total_price("RRRRQQQQ", offers_data_card, price_data_card) == 280
+        assert checkout_solution.get_total_price("RRRRQQQQ", offers_data_card, price_data_card, multiply_offer_card) == 280
 
-        assert checkout_solution.get_total_price("UUUU", offers_data_card, price_data_card) == 120
+        assert checkout_solution.get_total_price("STX", offers_data_card, price_data_card, multiply_offer_card) == 45
+
+        assert checkout_solution.get_total_price("STT", offers_data_card, price_data_card, multiply_offer_card) == 45
+
+        assert checkout_solution.get_total_price("SSTYYZZ", offers_data_card, price_data_card, multiply_offer_card) == 111
+
+        assert checkout_solution.get_total_price("SSSTTTXXX", offers_data_card, price_data_card, multiply_offer_card) == 135
