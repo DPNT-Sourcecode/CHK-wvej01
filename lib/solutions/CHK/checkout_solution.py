@@ -14,7 +14,7 @@ price_data_card = {
 offers_data_card = {
     "A": {5: 200, 3: 130},
     "B": {2: 45},
-    "E": {3: 80}
+    "E": {2: "Remove one B"}
 }
 
 def calc_items_quantity(skus: str) -> dict:
@@ -31,10 +31,10 @@ def apply_offers_price(data_dict: dict, offers_data: dict) -> dict:
         offers = offers_data.get(item_name)
         if offers is None:
             continue
-        for offer_quantity, offer_price in offers.items():
+        for offer_quantity, offer_data in offers.items():
             while int(data["quantity_to_calc"]) >= offer_quantity:
                 data["quantity_to_calc"]-= offer_quantity
-                data["offers_price"] = data.get("offers_price", 0) + offer_price
+                data["offers_price"] = data.get("offers_price", 0) + offer_data
     return data_dict
 
 
@@ -65,6 +65,7 @@ def checkout(skus: str):
         return 0
     
     return get_total_price(skus, offers_data_card, price_data_card)
+
 
 
 
