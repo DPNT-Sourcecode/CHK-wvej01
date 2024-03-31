@@ -62,26 +62,27 @@ def apply_multi_offers(data_dict: dict, multiply_offer: dict) -> dict:
             item_price = offer["total_price"] / offer["total_quantity"]
 
             items_to_process = offer["total_quantity"]
-            for item_name, item_data in data_dict.items():
-                if items_to_process == 0:
-                    break
+            while items_to_process > 0:
+                for item_name, item_data in data_dict.items():
+                    if items_to_process == 0:
+                        break
 
-                if item_name not in offer["items"] or item_data["quantity_to_calc"] == 0:
-                    continue
+                    if item_name not in offer["items"] or item_data["quantity_to_calc"] == 0:
+                        continue
 
-                min_item_price_for_multi_offer = min([price_data_card[item_name] for item_name, item_data in data_dict.items() if item_name in offer["items"] and item_data["quantity_to_calc"] > 0])
-                
-                if price_data_card[item_name] > min_item_price_for_multi_offer:
-                    # breakpoint()
-                    continue
+                    min_item_price_for_multi_offer = min([price_data_card[item_name] for item_name, item_data in data_dict.items() if item_name in offer["items"] and item_data["quantity_to_calc"] > 0])
+                    
+                    if price_data_card[item_name] > min_item_price_for_multi_offer:
+                        # breakpoint()
+                        continue
 
-                item_quantity_to_process = min(item_data["quantity_to_calc"], items_to_process)
-                offer_price =  item_quantity_to_process * item_price
-                item_data["offers_price"] = item_data.get("offers_price", 0) + offer_price
-                item_data["quantity_to_calc"] -= item_quantity_to_process
-                items_to_process -= item_quantity_to_process
+                    item_quantity_to_process = min(item_data["quantity_to_calc"], items_to_process)
+                    offer_price =  item_quantity_to_process * item_price
+                    item_data["offers_price"] = item_data.get("offers_price", 0) + offer_price
+                    item_data["quantity_to_calc"] -= item_quantity_to_process
+                    items_to_process -= item_quantity_to_process
 
-                total_items_quantity -= item_quantity_to_process
+                    total_items_quantity -= item_quantity_to_process
 
 
     return data_dict
@@ -126,8 +127,8 @@ def apply_regular_prices(data_dict: dict, price_data: dict) -> dict:
 
 def get_total_price(skus: str, offers_data, price_data, multiply_offer):
     quantity_data = calc_items_quantity(skus)
-    if skus == "STX":
-        breakpoint()
+    # if skus == "STX":
+    #     breakpoint()
     items_with_multi_offers_processed = apply_multi_offers(quantity_data, multiply_offer)
     items_with_offers_processed = apply_offers_price(items_with_multi_offers_processed, offers_data)
     items_with_reg_prices_processed = apply_regular_prices(items_with_offers_processed, price_data)
