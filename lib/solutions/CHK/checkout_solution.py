@@ -59,10 +59,6 @@ def apply_multi_offers(data_dict: dict, multiply_offer: dict) -> dict:
 
         while total_items_quantity >= offer["total_quantity"]:
 
-            
-            
-            total_items_quantity -= offer["total_quantity"]
-
             item_price = offer["total_price"] / offer["total_quantity"]
 
             items_to_process = offer["total_quantity"]
@@ -84,6 +80,8 @@ def apply_multi_offers(data_dict: dict, multiply_offer: dict) -> dict:
                 item_data["offers_price"] = item_data.get("offers_price", 0) + offer_price
                 item_data["quantity_to_calc"] -= item_quantity_to_process
                 items_to_process -= item_quantity_to_process
+
+                total_items_quantity -= offer["total_quantity"]
 
     return data_dict
 
@@ -143,10 +141,3 @@ def checkout(skus: str):
         return 0
         
     return get_total_price(skus, offers_data_card, price_data_card, multiply_offer_card)
-
-
-
-
-
-
-
