@@ -57,8 +57,6 @@ def apply_multi_offers(data_dict: dict, multiply_offer: dict) -> dict:
 
         total_items_quantity = sum([item_data["quantity_to_calc"] for item_name, item_data in data_dict.items() if item_name in offer["items"]])
 
-        total_items_quantity_by_price = {price_data_card[item_name]: item_data["quantity_to_calc"] for item_name, item_data in data_dict.items() if item_name in offer["items"]}
-
         while total_items_quantity >= offer["total_quantity"]:
 
             
@@ -69,19 +67,15 @@ def apply_multi_offers(data_dict: dict, multiply_offer: dict) -> dict:
 
             items_to_process = offer["total_quantity"]
             for item_name, item_data in data_dict.items():
-                
-                
 
+                total_items_quantity = sum([item_data["quantity_to_calc"] for item_name, item_data in data_dict.items() if item_name in offer["items"]])
+                
                 if items_to_process == 0:
                     break
-
 
                 if item_name not in offer["items"] or item_data["quantity_to_calc"] == 0:
                     continue
 
-                if price_data_card[item_name] < max(total_items_quantity_by_price.keys()):
-                    continue
-                
                 item_quantity_to_process = min(item_data["quantity_to_calc"], items_to_process)
                 offer_price =  item_quantity_to_process * item_price
                 item_data["offers_price"] = item_data.get("offers_price", 0) + offer_price
@@ -146,6 +140,7 @@ def checkout(skus: str):
         return 0
         
     return get_total_price(skus, offers_data_card, price_data_card, multiply_offer_card)
+
 
 
 
