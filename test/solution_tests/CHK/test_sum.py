@@ -64,4 +64,9 @@ class TestApplyRegularPrices:
 
 class TestGetTotalPrice:
     def test_get_total_price(self):
-        
+        assert checkout_solution.get_total_price("AABBCCC", offers_data_card, price_data_card) == 205
+
+        assert checkout_solution.get_total_price("AAAAABBCCC", offers_data_card, price_data_card) == 335
+
+        assert checkout_solution.get_total_price("AAABBBBBBCCCDDD", offers_data_card, price_data_card) == 370
+
