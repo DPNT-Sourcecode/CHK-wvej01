@@ -61,9 +61,22 @@ def apply_multi_offers(data_dict: dict, multiply_offer: dict) -> dict:
             total_items_quantity -= offer["total_quantity"]
 
             item_price = offer["total_price"] / offer["total_quantity"]
-            
 
-            item_data["offers_price"] = item_data.get("offers_price", 0) + offer_data
+            items_to_process = offer["total_quantity"]
+            for item_name, item_data in data_dict.items():
+                if items_to_process == 0:
+                    break
+
+                if item_name not in offer["items"] or item_data["quantity_to_calc"] == 0:
+                    continue
+                
+                itme
+                offer_price =  * item_price
+
+                item_data["offers_price"] = item_data.get("offers_price", 0) + offer_price
+
+                items_to_process -= 1
+
 
             for item_name in offer["items"]:
                 item_quantity = 
@@ -122,6 +135,7 @@ def checkout(skus: str):
         return 0
         
     return get_total_price(skus, offers_data_card, price_data_card)
+
 
 
 
