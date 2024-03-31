@@ -24,4 +24,8 @@ class TestOffersApply():
     def test_offers_apply(self):
         assert checkout_solution.apply_offers_price({"A": {"total_quantity": 7}}) == {"A": {"total_quantity": 7, "quantity_to_calc": 1, "offers_price": 260}}
 
+        assert checkout_solution.apply_offers_price({"A": {"total_quantity": 7}}) == {"A": {"total_quantity": 7, "quantity_to_calc": 1, "offers_price": 260}}
+
+        assert checkout_solution.apply_offers_price({"B": {"total_quantity": 6}, "D": {"total_quantity": 5}}) == {"B": {"total_quantity": 6, "quantity_to_calc": 0, "offers_price": 135}, "D": {"total_quantity": 5, "quantity_to_calc": 5}}
+
 

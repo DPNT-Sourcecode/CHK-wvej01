@@ -28,7 +28,7 @@ def apply_offers_price(data_dict: dict):
         data["quantity_to_calc"] = data["total_quantity"]
         offers = offers_data.get(item_name)
         for offer_quantity, offer_price in offers.items():
-            while data["quantity_to_calc"] < offer_quantity:
+            while int(data["quantity_to_calc"]) > offer_quantity:
                 data["quantity_to_calc"]-= offer_quantity
                 data["offers_price"] = data.get("offers_price", 0) + offer_price
     return data_dict
