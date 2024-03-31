@@ -76,8 +76,7 @@ def apply_multi_offers(data_dict: dict, multiply_offer: dict) -> dict:
                 item_data["offers_price"] = item_data.get("offers_price", 0) + offer_price
                 item_data["quantity_to_calc"] -= item_quantity_to_process
                 items_to_process -= item_quantity_to_process
-    if "S" in data_dict.keys():
-        breakpoint()
+
     return data_dict
 
 
@@ -119,6 +118,9 @@ def apply_regular_prices(data_dict: dict, price_data: dict) -> dict:
     return data_dict
 
 def get_total_price(skus: str, offers_data, price_data, multiply_offer):
+    if "SSTYYZZ" == skus:
+        breakpoint()
+
     quantity_data = calc_items_quantity(skus)
     items_with_multi_offers_processed = apply_multi_offers(quantity_data, multiply_offer)
     items_with_offers_processed = apply_offers_price(items_with_multi_offers_processed, offers_data)
