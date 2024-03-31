@@ -72,7 +72,7 @@ def apply_multi_offers(data_dict: dict, multiply_offer: dict) -> dict:
 
                     min_item_price_for_multi_offer = min([price_data_card[item_name] for item_name, item_data in data_dict.items() if item_name in offer["items"] and item_data["quantity_to_calc"] > 0])
                     
-                    if price_data_card[item_name] > min_item_price_for_multi_offer:
+                    if price_data_card[item_name] < min_item_price_for_multi_offer:
                         # breakpoint()
                         continue
 
