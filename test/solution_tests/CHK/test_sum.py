@@ -16,7 +16,8 @@ import pytest
 
 class TestQuantityCheck():
     def test_q_check(self):
-        assert checkout_solution.calc_items_quantity("AA") == {"A": 2}
-        assert checkout_solution.calc_items_quantity("AAABBBCCC") == {"A": 3, "B": 3, "C": 3}
-        assert checkout_solution.calc_items_quantity("AABCCCC") == {"A": 2, "B": 1, "C": 4}
+        assert checkout_solution.calc_items_quantity("AA") == {"A": {"quantity": 2}}
+        assert checkout_solution.calc_items_quantity("AAABBBCCC") == {"A": {"quantity": 3}, "B": {"quantity": 3}, "C": {"quantity": 3}}
+        assert checkout_solution.calc_items_quantity("AABCCCC") == {"A": {"quantity": 1}, "B": {"quantity": 1}, "C": {"quantity": 4}}
    
+
