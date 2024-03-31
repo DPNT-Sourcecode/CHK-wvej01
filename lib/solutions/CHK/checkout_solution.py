@@ -36,7 +36,6 @@ def apply_offers_price(data_dict: dict, offers_data: dict) -> dict:
                 if isinstance(offer_data, dict):
                     quantity_to_calc_for_offer -= offer_quantity
                     for item_offer, item_quantity in offer_data.items():
-                        breakpoint()
                         data_dict[item_offer]["quantity_to_calc"] -= item_quantity
                 else:
                     quantity_to_calc_for_offer -= offer_quantity
@@ -72,4 +71,5 @@ def checkout(skus: str):
         return 0
     
     return get_total_price(skus, offers_data_card, price_data_card)
+
 

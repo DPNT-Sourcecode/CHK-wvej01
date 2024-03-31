@@ -35,11 +35,11 @@ class TestQuantityCheck:
 class TestOffersApply:
     def test_offers_apply(self):
         assert checkout_solution.apply_offers_price(
-            {"A": {"total_quantity": 7}}, offers_data_card
+            {"A": {"total_quantity": 7, "quantity_to_calc": 7}}, offers_data_card
         ) == {"A": {"total_quantity": 7, "quantity_to_calc": 2, "offers_price": 200}}
 
         assert checkout_solution.apply_offers_price(
-            {"B": {"total_quantity": 6}, "D": {"total_quantity": 5}}, offers_data_card
+            {"B": {"total_quantity": 6, "quantity_to_calc": 6}, "D": {"total_quantity": 5, "quantity_to_calc": 5}}, offers_data_card
         ) == {
             "B": {"total_quantity": 6, "quantity_to_calc": 0, "offers_price": 135},
             "D": {"total_quantity": 5, "quantity_to_calc": 5},
@@ -83,3 +83,4 @@ class TestGetTotalPrice:
         assert checkout_solution.get_total_price("EEEEBB", offers_data_card, price_data_card) == 160
 
         assert checkout_solution.get_total_price("EEEB", offers_data_card, price_data_card) == 120
+
