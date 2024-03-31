@@ -7,12 +7,14 @@ price_data_card = {
     "A": 50,
     "B": 30,
     "C": 20,
-    "D": 15
+    "D": 15,
+    "E": 40
 }
 
 offers_data_card = {
-    "A": {3: 130},
-    "B": {2: 45}
+    "A": {5: 200, 3: 130},
+    "B": {2: 45},
+    "E": {3: 80}
 }
 
 def calc_items_quantity(skus: str) -> dict:
@@ -63,5 +65,6 @@ def checkout(skus: str):
         return 0
     
     return get_total_price(skus, offers_data_card, price_data_card)
+
 
 
