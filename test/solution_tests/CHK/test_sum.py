@@ -20,4 +20,3 @@ class TestQuantityCheck():
         assert checkout_solution.calc_items_quantity("AAABBBCCC") == {"A": {"quantity": 3}, "B": {"quantity": 3}, "C": {"quantity": 3}}
         assert checkout_solution.calc_items_quantity("AABCCCC") == {"A": {"quantity": 1}, "B": {"quantity": 1}, "C": {"quantity": 4}}
    
-
