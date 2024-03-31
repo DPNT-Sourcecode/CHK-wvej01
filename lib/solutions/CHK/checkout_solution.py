@@ -67,13 +67,16 @@ def apply_multi_offers(data_dict: dict, multiply_offer: dict) -> dict:
 
             items_to_process = offer["total_quantity"]
             for item_name, item_data in data_dict.items():
-
-                total_items_quantity = sum([item_data["quantity_to_calc"] for item_name, item_data in data_dict.items() if item_name in offer["items"]])
-                
                 if items_to_process == 0:
                     break
 
                 if item_name not in offer["items"] or item_data["quantity_to_calc"] == 0:
+                    continue
+
+                min_item_price_for_multi_offer = min([price_data_card[item_name] for item_name, item_data in data_dict.items() if item_name in offer["items"] and item_data["quantity_to_calc"] > 0])
+                
+                if price_data_card[item_name] > min_item_price_for_multi_offer:
+                    breakpoint()
                     continue
 
                 item_quantity_to_process = min(item_data["quantity_to_calc"], items_to_process)
@@ -140,6 +143,7 @@ def checkout(skus: str):
         return 0
         
     return get_total_price(skus, offers_data_card, price_data_card, multiply_offer_card)
+
 
 
 
