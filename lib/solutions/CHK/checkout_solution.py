@@ -13,8 +13,9 @@ price_data_card = {
 
 offers_data_card = {
     "A": {5: 200, 3: 130},
+    "E": {2: {"B": 1}},
     "B": {2: 45},
-    "E": {2: {"B": 1}}
+    
 }
 
 def calc_items_quantity(skus: str) -> dict:
@@ -26,6 +27,10 @@ def calc_items_quantity(skus: str) -> dict:
     return data_dict
 
 def apply_offers_price(data_dict: dict, offers_data: dict) -> dict:
+    for offer_quantity, offer_data in offers_data.items():
+        for offers in offer_data
+
+
     for item_name, data in data_dict.items():
         offers = offers_data.get(item_name)
         if offers is None:
@@ -72,6 +77,7 @@ def checkout(skus: str):
         return 0
     
     return get_total_price(skus, offers_data_card, price_data_card)
+
 
 
 
