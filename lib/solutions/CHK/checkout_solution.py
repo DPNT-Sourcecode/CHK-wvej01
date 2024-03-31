@@ -3,14 +3,14 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 
-price_data = {
+price_data_card = {
     "A": 50,
     "B": 30,
     "C": 20,
     "D": 15
 }
 
-offers_data = {
+offers_data_card = {
     "A": {3: 130},
     "B": {2: 45}
 }
@@ -23,10 +23,10 @@ def calc_items_quantity(skus: str) -> dict:
         data_dict[letter] = {"total_quantity": skus.count(letter)}
     return data_dict
 
-def apply_offers_price(data_dict: dict) -> dict:
+def apply_offers_price(data_dict: dict, offers_data_card: dict) -> dict:
     for item_name, data in data_dict.items():
         data["quantity_to_calc"] = data["total_quantity"]
-        offers = offers_data.get(item_name)
+        offers = offers_data_card.get(item_name)
         if offers is None:
             continue
         for offer_quantity, offer_price in offers.items():
@@ -36,7 +36,7 @@ def apply_offers_price(data_dict: dict) -> dict:
     return data_dict
 
 
-def apply_regular_prices(data_dict: dict) -> dict:
+def apply_regular_prices(data_dict: dict, price_data: dict) -> dict:
     for item_name, data in data_dict.items():
         data["regular_price"] = price_data.get(item_name) * data["quantity_to_calc"]
         data["quantity_to_calc"] = 0
@@ -47,23 +47,19 @@ def apply_regular_prices(data_dict: dict) -> dict:
 
 def get_total_price(skus: str):
     quantity_data = calc_items_quantity(skus)
-    items_with_offers_proccessed = apply_offers_price(quantity_data)
+    items_with_offers_processed = apply_offers_price(quantity_data, offers_data_card)
+    items_with_reg_prices_processed = apply_regular_prices(items_with_offers_processed)
+
+    return sum([data["total_price"] for _, data in items_with_reg_prices_processed.items()])
 
 
 def checkout(skus: str):
     if not isinstance(skus, str):
         return -1
     for item_name in skus:
-        if price_data.get(item_name) is None:
+        if price_data_card.get(item_name) is None:
             return -1
     if len(skus) == 0:
         return -1
     
-
-    print(skus)
-    raise NotImplementedError()
-
-
-
-
-
+    return get_total_price(skus)

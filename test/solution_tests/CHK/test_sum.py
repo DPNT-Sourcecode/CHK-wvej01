@@ -68,8 +68,3 @@ class TestApplyRegularPrices:
                 "regular_price": 300
             },
         }
-
-
-
-
-
