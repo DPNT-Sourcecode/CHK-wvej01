@@ -2,7 +2,7 @@
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-
+from price_rate_card import price_data, offers_data
 
 def calc_items_quantity(skus: str) -> dict:
     dict_with_item_quantity = dict()
@@ -17,3 +17,4 @@ def apply_
 def checkout(skus):
     print(skus)
     raise NotImplementedError()
+
