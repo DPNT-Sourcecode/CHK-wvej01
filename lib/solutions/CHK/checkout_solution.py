@@ -118,9 +118,6 @@ def apply_regular_prices(data_dict: dict, price_data: dict) -> dict:
     return data_dict
 
 def get_total_price(skus: str, offers_data, price_data, multiply_offer):
-    if "SSTYYZZ" == skus:
-        breakpoint()
-
     quantity_data = calc_items_quantity(skus)
     items_with_multi_offers_processed = apply_multi_offers(quantity_data, multiply_offer)
     items_with_offers_processed = apply_offers_price(items_with_multi_offers_processed, offers_data)
@@ -138,3 +135,4 @@ def checkout(skus: str):
         return 0
         
     return get_total_price(skus, offers_data_card, price_data_card)
+
