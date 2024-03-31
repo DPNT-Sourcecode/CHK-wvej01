@@ -22,22 +22,22 @@ def calc_items_quantity(skus: str) -> dict:
     for letter in skus:
         if letter in data_dict.keys():
             continue
-        data_dict[letter] = {"total_quantity": skus.count(letter)}
+        data_dict[letter] = {"total_quantity": skus.count(letter), "quantity_to_calc": skus.count(letter)}
     return data_dict
 
 def apply_offers_price(data_dict: dict, offers_data: dict) -> dict:
     for item_name, data in data_dict.items():
-        data["quantity_to_calc"] = data["total_quantity"]
         offers = offers_data.get(item_name)
         if offers is None:
             continue
         for offer_quantity, offer_data in offers.items():
             while int(data["quantity_to_calc"]) >= offer_quantity:
-                data["quantity_to_calc"]-= offer_quantity
                 if isinstance(offer_data, dict):
                     for item_offer, item_quantity in offer_data.items():
-                        data_dict["item_offer"]
-                data["offers_price"] = data.get("offers_price", 0) + offer_data
+                        data_dict[item_offer]["quantity_to_calc"] -= item_quantity
+                else:
+                    data["quantity_to_calc"]-= offer_quantity
+                    data["offers_price"] = data.get("offers_price", 0) + offer_data
     return data_dict
 
 
@@ -68,9 +68,3 @@ def checkout(skus: str):
         return 0
     
     return get_total_price(skus, offers_data_card, price_data_card)
-
-
-
-
-
-

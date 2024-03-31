@@ -12,24 +12,23 @@ price_data_card = {
 offers_data_card = {
     "A": {5: 200, 3: 130},
     "B": {2: 45},
-    "E": {3: 80}
+    "E": {2: {"B": 1}}
 }
-
 
 class TestQuantityCheck:
     def test_q_check(self):
         assert checkout_solution.calc_items_quantity("AA") == {
-            "A": {"total_quantity": 2}
+            "A": {"total_quantity": 2, "quantity_to_calc": 2},
         }
         assert checkout_solution.calc_items_quantity("AAABBBCCC") == {
-            "A": {"total_quantity": 3},
-            "B": {"total_quantity": 3},
-            "C": {"total_quantity": 3},
+            "A": {"total_quantity": 3, "quantity_to_calc": 3},
+            "B": {"total_quantity": 3, "quantity_to_calc": 3},
+            "C": {"total_quantity": 3, "quantity_to_calc": 3},
         }
         assert checkout_solution.calc_items_quantity("AABCCCC") == {
-            "A": {"total_quantity": 2},
-            "B": {"total_quantity": 1},
-            "C": {"total_quantity": 4},
+            "A": {"total_quantity": 2, "quantity_to_calc": 2},
+            "B": {"total_quantity": 1, "quantity_to_calc": 1},
+            "C": {"total_quantity": 4, "quantity_to_calc": 4},
         }
 
 
@@ -84,6 +83,3 @@ class TestGetTotalPrice:
         assert checkout_solution.get_total_price("EEEEBB", offers_data_card, price_data_card) == 160
 
         assert checkout_solution.get_total_price("EEEB", offers_data_card, price_data_card) == 120
-
-
-
