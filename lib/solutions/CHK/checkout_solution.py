@@ -43,12 +43,26 @@ def apply_regular_prices(data_dict: dict) -> dict:
     
     for _, data in data_dict.items():
         data["total_price"] = data["offers_price"] + data["regular_price"]
+    return data_dict
+
+def get_total_price(skus: str):
+    quantity_data = calc_items_quantity(skus)
+    items_with_offers_proccessed = apply_offers_price(quantity_data)
 
 
+def checkout(skus: str):
+    if not isinstance(skus, str):
+        return -1
+    for item_name in skus:
+        if price_data.get(item_name) is None:
+            return -1
+    if len(skus) == 0:
+        return -1
+    
 
-def checkout(skus):
     print(skus)
     raise NotImplementedError()
+
 
 
 

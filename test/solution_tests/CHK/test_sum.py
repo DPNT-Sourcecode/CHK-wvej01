@@ -58,14 +58,17 @@ class TestApplyRegularPrices:
                 "quantity_to_calc": 0,
                 "offers_price": 10,
                 "total_price": 260,
+                "regular_price": 250
             },
             "B": {
                 "total_quantity": 6,
                 "quantity_to_calc": 0,
                 "offers_price": 50,
                 "total_price": 350,
+                "regular_price": 300
             },
         }
+
 
 
 
