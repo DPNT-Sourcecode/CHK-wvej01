@@ -23,10 +23,10 @@ def calc_items_quantity(skus: str) -> dict:
         data_dict[letter] = {"total_quantity": skus.count(letter)}
     return data_dict
 
-def apply_offers_price(data_dict: dict, offers_data_card: dict) -> dict:
+def apply_offers_price(data_dict: dict, offers_data: dict) -> dict:
     for item_name, data in data_dict.items():
         data["quantity_to_calc"] = data["total_quantity"]
-        offers = offers_data_card.get(item_name)
+        offers = offers_data.get(item_name)
         if offers is None:
             continue
         for offer_quantity, offer_price in offers.items():
@@ -45,10 +45,10 @@ def apply_regular_prices(data_dict: dict, price_data: dict) -> dict:
         data["total_price"] = data["offers_price"] + data["regular_price"]
     return data_dict
 
-def get_total_price(skus: str):
+def get_total_price(skus: str, offers_data, price_data):
     quantity_data = calc_items_quantity(skus)
-    items_with_offers_processed = apply_offers_price(quantity_data, offers_data_card)
-    items_with_reg_prices_processed = apply_regular_prices(items_with_offers_processed)
+    items_with_offers_processed = apply_offers_price(quantity_data, offers_data)
+    items_with_reg_prices_processed = apply_regular_prices(items_with_offers_processed, price_data)
 
     return sum([data["total_price"] for _, data in items_with_reg_prices_processed.items()])
 
@@ -62,4 +62,4 @@ def checkout(skus: str):
     if len(skus) == 0:
         return -1
     
-    return get_total_price(skus)
+    return get_total_price(skus, offers_data_card, price_data_card)
