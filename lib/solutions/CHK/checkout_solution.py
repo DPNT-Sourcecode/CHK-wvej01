@@ -40,7 +40,7 @@ def apply_offers_price(data_dict: dict, offers_data: dict) -> dict:
 
 def apply_regular_prices(data_dict: dict, price_data: dict) -> dict:
     for item_name, data in data_dict.items():
-        data["regular_price"] = price_data.get(item_name) * data["quantity_to_calc"]
+        data["regular_price"] = price_data.get(item_name) * data.get("quantity_to_calc", 0)
         data["quantity_to_calc"] = 0
     
     for _, data in data_dict.items():
@@ -65,6 +65,7 @@ def checkout(skus: str):
         return 0
     
     return get_total_price(skus, offers_data_card, price_data_card)
+
 
 
 

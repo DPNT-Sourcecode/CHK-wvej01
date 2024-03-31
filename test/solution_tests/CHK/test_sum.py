@@ -1,9 +1,19 @@
 from solutions.CHK import checkout_solution
 import pytest
 
-price_data_card = {"A": 50, "B": 30, "C": 20, "D": 15}
+price_data_card = {
+    "A": 50,
+    "B": 30,
+    "C": 20,
+    "D": 15,
+    "E": 40
+}
 
-offers_data_card = {"A": {3: 130}, "B": {2: 45}}
+offers_data_card = {
+    "A": {5: 200, 3: 130},
+    "B": {2: 45},
+    "E": {3: 80}
+}
 
 
 class TestQuantityCheck:
@@ -66,7 +76,15 @@ class TestGetTotalPrice:
     def test_get_total_price(self):
         assert checkout_solution.get_total_price("AABBCCC", offers_data_card, price_data_card) == 205
 
-        assert checkout_solution.get_total_price("AAAAABBCCC", offers_data_card, price_data_card) == 335
+        assert checkout_solution.get_total_price("AAAAABBCCC", offers_data_card, price_data_card) == 305
 
         assert checkout_solution.get_total_price("AAABBBBBBCCCDDD", offers_data_card, price_data_card) == 370
+
+
+        # assert checkout_solution.get_total_price("EEEEBB", offers_data_card, price_data_card) == 160
+
+        # assert checkout_solution.get_total_price("EEB", offers_data_card, price_data_card) == 80
+
+        # assert checkout_solution.get_total_price("EEEB", offers_data_card, price_data_card) == 120
+
 
