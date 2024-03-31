@@ -47,12 +47,19 @@ offers_data_card = {
     "V": {3: 130, 2: 90}
 }
 
-multiply_offer = {
+multiply_offer_card = [
     {"items": ["S", "T", "X", "Y", "Z"], "total_quantity": 3, "total_price": 45}
-}
+]
 
 
-def apply_multi_offers()
+def apply_multi_offers(data_dict: dict, multiply_offer: dict) -> dict:
+    for offer in multiply_offer:
+
+        total_items_quantity = sum([item_data["quantity_to_calc"] for item_name, item_data in data_dict.items() if item_name in offer["items"]])
+
+        while 
+        for item_name in offer["items"]:
+            item_quantity = 
 
 
 def calc_items_quantity(skus: str) -> dict:
@@ -108,6 +115,7 @@ def checkout(skus: str):
         return 0
         
     return get_total_price(skus, offers_data_card, price_data_card)
+
 
 
 
